@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
-using OrgManager.Domain;
 
-namespace ProEventos.Domain.Identity
+namespace OrgManager.Domain.Identity
 {
-    public class User : IdentityUser<Guid>
+    public class User : IdentityUser<int>
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -15,7 +14,7 @@ namespace ProEventos.Domain.Identity
         public string? CPF { get; set; }
         public DateTime? BirthDate { get; set; }
         public DateTime? EntryDate { get; set; }
-        public Guid OrganizationId { get; set; }
+        public int OrganizationId { get; set; }
         public Organization? Organization { get; set; }
         public IEnumerable<Address>? Addresses { get; set; }
         public IEnumerable<Phone>? Phones { get; set; }
