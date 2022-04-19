@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "OrgManager.Repository/1.0.0": {
+        "dependencies": {
+          "OrgManager.Domain": "1.0.0"
+        },
+        "runtime": {
+          "OrgManager.Repository.dll": {}
+        }
+      },
+      "OrgManager.Domain/1.0.0": {
+        "runtime": {
+          "OrgManager.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "OrgManager.Repository/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "OrgManager.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

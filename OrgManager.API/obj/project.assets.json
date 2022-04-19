@@ -72,6 +72,43 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "OrgManager.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "OrgManager.Domain": "1.0.0",
+          "OrgManager.Repository": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/OrgManager.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/OrgManager.Application.dll": {}
+        }
+      },
+      "OrgManager.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/OrgManager.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/OrgManager.Domain.dll": {}
+        }
+      },
+      "OrgManager.Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "OrgManager.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/OrgManager.Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/OrgManager.Repository.dll": {}
+        }
       }
     }
   },
@@ -200,10 +237,26 @@
         "swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "OrgManager.Application/1.0.0": {
+      "type": "project",
+      "path": "../OrgManager.Application/OrgManager.Application.csproj",
+      "msbuildProject": "../OrgManager.Application/OrgManager.Application.csproj"
+    },
+    "OrgManager.Domain/1.0.0": {
+      "type": "project",
+      "path": "../OrgManager.Domain/OrgManager.Domain.csproj",
+      "msbuildProject": "../OrgManager.Domain/OrgManager.Domain.csproj"
+    },
+    "OrgManager.Repository/1.0.0": {
+      "type": "project",
+      "path": "../OrgManager.Repository/OrgManager.Repository.csproj",
+      "msbuildProject": "../OrgManager.Repository/OrgManager.Repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "OrgManager.Application >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -238,7 +291,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\dev\\org-manager-api\\src\\OrgManager.Application\\OrgManager.Application.csproj": {
+              "projectPath": "C:\\dev\\org-manager-api\\src\\OrgManager.Application\\OrgManager.Application.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
