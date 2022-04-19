@@ -10,6 +10,6 @@ namespace OrgManager.Domain
         public Departament? Departament { get; set; }
         public int UserId { get; set; }
         public User? User { get; set; }
-        public DepartamentFunction Function { get; set; }
+        public Function Function { get; set; }
     }
 }

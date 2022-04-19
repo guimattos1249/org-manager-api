@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using OrgManager.Domain.Enum;
 
 namespace OrgManager.Domain.Identity
 {
@@ -14,6 +15,7 @@ namespace OrgManager.Domain.Identity
         public string? CPF { get; set; }
         public DateTime? BirthDate { get; set; }
         public DateTime? EntryDate { get; set; }
+        public Function Function { get; set; }
         public int OrganizationId { get; set; }
         public Organization? Organization { get; set; }
         public IEnumerable<Address>? Addresses { get; set; }

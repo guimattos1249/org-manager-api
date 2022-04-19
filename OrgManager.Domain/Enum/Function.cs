@@ -1,9 +1,10 @@
 namespace OrgManager.Domain.Enum
 {
-    public enum DepartamentFunction
+    public enum Function
     {
         Owner,
         Leader,
-        Staff
+        Staff,
+        Member
     }
 }
