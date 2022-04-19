@@ -1,0 +1,17 @@
+C:\dev\org-manager-api\src\OrgManager.Application\bin\Debug\net6.0\OrgManager.Application.deps.json
+C:\dev\org-manager-api\src\OrgManager.Application\bin\Debug\net6.0\OrgManager.Application.dll
+C:\dev\org-manager-api\src\OrgManager.Application\bin\Debug\net6.0\OrgManager.Application.pdb
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\OrgManager.Application.csproj.AssemblyReference.cache
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\OrgManager.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\OrgManager.Application.AssemblyInfoInputs.cache
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\OrgManager.Application.AssemblyInfo.cs
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\OrgManager.Application.csproj.CoreCompileInputs.cache
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\OrgManager.Application.dll
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\refint\OrgManager.Application.dll
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\OrgManager.Application.pdb
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\ref\OrgManager.Application.dll
+C:\dev\org-manager-api\src\OrgManager.Application\bin\Debug\net6.0\OrgManager.Domain.dll
+C:\dev\org-manager-api\src\OrgManager.Application\bin\Debug\net6.0\OrgManager.Repository.dll
+C:\dev\org-manager-api\src\OrgManager.Application\bin\Debug\net6.0\OrgManager.Domain.pdb
+C:\dev\org-manager-api\src\OrgManager.Application\bin\Debug\net6.0\OrgManager.Repository.pdb
+C:\dev\org-manager-api\src\OrgManager.Application\obj\Debug\net6.0\OrgManager.Application.csproj.CopyComplete
