@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrgManager.Repository.Contexts;
 
@@ -10,9 +11,10 @@ using OrgManager.Repository.Contexts;
 namespace OrgManager.Repository.Migrations
 {
     [DbContext(typeof(OrgManagerContext))]
-    partial class OrgManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20220420164918_AddingUserAndOrgToPhone")]
+    partial class AddingUserAndOrgToPhone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -573,7 +575,7 @@ namespace OrgManager.Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("OrgManager.Domain.Identity.User", "User")
-                        .WithMany("UserDepartament")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -598,8 +600,6 @@ namespace OrgManager.Repository.Migrations
                     b.Navigation("Addresses");
 
                     b.Navigation("Phones");
-
-                    b.Navigation("UserDepartament");
 
                     b.Navigation("UserRoles");
                 });

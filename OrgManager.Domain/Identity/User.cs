@@ -20,5 +20,6 @@ namespace OrgManager.Domain.Identity
         public Organization? Organization { get; set; }
         public IEnumerable<Address>? Addresses { get; set; }
         public IEnumerable<Phone>? Phones { get; set; }
+        public IEnumerable<UserDepartament>? UserDepartament { get; set; }
     }
 }
