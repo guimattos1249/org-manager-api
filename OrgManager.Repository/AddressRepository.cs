@@ -9,11 +9,11 @@ using OrgManager.Repository.Interfaces;
 
 namespace OrgManager.Repository
 {
-    public class AddressRepository : IAddressRepository
+    public class AddressRepository : GeneralRepository, IAddressRepository
     {
         private readonly OrgManagerContext _context;
 
-        public AddressRepository(OrgManagerContext context)
+        public AddressRepository(OrgManagerContext context) : base(context)
         {
             _context = context;
         }

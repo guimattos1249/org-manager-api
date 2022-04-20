@@ -9,11 +9,11 @@ using OrgManager.Repository.Interfaces;
 
 namespace OrgManager.Repository
 {
-    public class PhoneRepository : IPhoneRepository
+    public class PhoneRepository : GeneralRepository, IPhoneRepository
     {
         private readonly OrgManagerContext _context;
 
-        public PhoneRepository(OrgManagerContext context)
+        public PhoneRepository(OrgManagerContext context) : base(context)
         {
             _context = context;
         }

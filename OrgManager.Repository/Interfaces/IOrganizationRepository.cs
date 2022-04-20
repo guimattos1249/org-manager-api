@@ -7,7 +7,7 @@ using OrgManager.Repository.Helpers;
 
 namespace OrgManager.Repository.Interfaces
 {
-    public interface IOrganizationRepository
+    public interface IOrganizationRepository : IGeneralRepository
     {
         Task<PageList<Organization>> GetAllOrganizationsAsync(PageParams pageParams);
         Task<Organization> GetOrganizationByIdAsync(int Id);

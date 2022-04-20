@@ -6,11 +6,11 @@ using OrgManager.Repository.Interfaces;
 
 namespace OrgManager.Repository
 {
-    public class OrganizationRepository : IOrganizationRepository
+    public class OrganizationRepository : GeneralRepository, IOrganizationRepository
     {
         private readonly OrgManagerContext _context;
 
-        public OrganizationRepository(OrgManagerContext context)
+        public OrganizationRepository(OrgManagerContext context) : base(context)
         {
             _context = context;
         }
