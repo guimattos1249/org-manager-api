@@ -6,7 +6,7 @@ using OrgManager.Domain.Identity;
 
 namespace OrgManager.Repository.Interfaces
 {
-    public interface IUserRespository : IGeneralRepository
+    public interface IUserRepository : IGeneralRepository
     {
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserByIdAsync(int Id);

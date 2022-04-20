@@ -9,7 +9,7 @@ using OrgManager.Repository.Interfaces;
 
 namespace OrgManager.Repository
 {
-    public class UserRepository : GeneralRepository, IUserRespository
+    public class UserRepository : GeneralRepository, IUserRepository
     {
         private readonly OrgManagerContext _context;
 
