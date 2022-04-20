@@ -573,7 +573,7 @@ namespace OrgManager.Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("OrgManager.Domain.Identity.User", "User")
-                        .WithMany()
+                        .WithMany("UserDepartament")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -598,6 +598,8 @@ namespace OrgManager.Repository.Migrations
                     b.Navigation("Addresses");
 
                     b.Navigation("Phones");
+
+                    b.Navigation("UserDepartament");
 
                     b.Navigation("UserRoles");
                 });
