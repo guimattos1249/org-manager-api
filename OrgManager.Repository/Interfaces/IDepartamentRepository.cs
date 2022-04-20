@@ -7,5 +7,6 @@ namespace OrgManager.Repository.Interfaces
     {
         Task<Departament> GetDepartamentByIdsAsync(int organizationId, int departamentId);
         Task<PageList<Departament>> GetAllByDepartamentesIdsAsync(PageParams pageParams, int organizationId, int departamentId);
+        Task<UserDepartament> GetUserDepartamentByIdsAsync(int departamentId, int userId);
     }
 }

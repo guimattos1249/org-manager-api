@@ -41,6 +41,15 @@ namespace OrgManager.Repository
             return await PageList<Departament>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
         }
 
-        //TODO: Create UserDepartament
+        public async Task<UserDepartament> GetUserDepartamentByIdsAsync(int departamentId, int userId)
+        {
+            IQueryable<UserDepartament> query = _context.UserDepartaments;
+
+            query = query.AsNoTracking()
+                         .Where(dp => dp.DepartamentId == departamentId &&
+                                      dp.UserId == userId);
+                                      
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }
