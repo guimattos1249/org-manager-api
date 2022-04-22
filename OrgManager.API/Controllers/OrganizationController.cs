@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrgManager.Application.Dtos;
 using OrgManager.Application.Interfaces;
 
 namespace OrgManager.API.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class OrganizationController : ControllerBase
     {
         private readonly IOrganizationService _organizationService;
@@ -23,6 +25,7 @@ namespace OrgManager.API.Controllers
             _accountService = accountService;
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
