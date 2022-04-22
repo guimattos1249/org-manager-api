@@ -22,8 +22,8 @@ namespace OrgManager.Repository
                 Include(o => o.Addresses);
 
             query = query.AsNoTracking()
-                         .Where(o => o.Id == Id)
-                         .OrderBy(o => o.Id);
+                         .OrderBy(o => o.Id)
+                         .Where(o => o.Id == Id);
 
             return await query.FirstOrDefaultAsync();
         }

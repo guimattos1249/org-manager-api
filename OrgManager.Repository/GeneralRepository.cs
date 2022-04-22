@@ -25,12 +25,12 @@ namespace OrgManager.Repository
             _context.Update(entity);
         }
 
-        public void Delte<T>(T entity) where T : class
+        public void Delete<T>(T entity) where T : class
         {
             _context.Remove(entity);
         }
 
-        public void DelteRange<T>(T[] entityArray) where T : class
+        public void DeleteRange<T>(T[] entityArray) where T : class
         {
             _context.RemoveRange(entityArray);
         }

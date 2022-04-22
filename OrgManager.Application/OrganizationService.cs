@@ -29,11 +29,11 @@ namespace OrgManager.Application
         {
             try
             {
-                var organization = _mapper.Map<Organization>(model);
+                Organization organization = _mapper.Map<Organization>(model);
                 _organizationRepository.Add<Organization>(organization);
                 if(await _organizationRepository.SaveChangesAsync())
                 {
-                    var organizationReturn = _organizationRepository.GetOrganizationByIdAsync(organization.Id);
+                    Organization organizationReturn = await _organizationRepository.GetOrganizationByIdAsync(organization.Id);
 
                     return _mapper.Map<OrganizationDto>(organizationReturn);
                 }
@@ -45,20 +45,60 @@ namespace OrgManager.Application
             }
         }
 
-        public Task<OrganizationDto> UpdateOrganization(int userId, int OrganizationId, OrganizationDto model)
+        public async Task<OrganizationDto> UpdateOrganization(OrganizationDto model)
         {
-            throw new NotImplementedException();
+            //TODO : To update organization, is needed verify if the user existis in this organization
+            try
+            {
+                Organization organization = await _organizationRepository.GetOrganizationByIdAsync(model.Id);
+                if (organization == null) return null;
+                _organizationRepository.Update<Organization>(organization);
+                if(await _organizationRepository.SaveChangesAsync())
+                {
+                    Organization organizationReturn = await _organizationRepository.GetOrganizationByIdAsync(organization.Id);
+
+                    return _mapper.Map<OrganizationDto>(organizationReturn);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<bool> DeleteOrganization(int userId, int OrganizationId)
+        public async Task<bool> DeleteOrganization(int organizationId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Organization organization =
+                await _organizationRepository.GetOrganizationByIdAsync(organizationId);
+                if (organization == null) return false;
+                _organizationRepository.Delete<Organization>(organization);
+                return await _organizationRepository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<OrganizationDto> GetOrganizationByIdAsync(int userId, int OrganizationId)
+        public async Task<OrganizationDto> GetOrganizationByIdAsync(int organizationId)
         {
             //TODO : To get organization, is needed verify if the user existis in this organization
-            throw new NotImplementedException();
+            try
+            {
+                var organization = await _organizationRepository.GetOrganizationByIdAsync(organizationId);
+                if (organization == null) return null;
+
+                var resultado = _mapper.Map<OrganizationDto>(organization);
+
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

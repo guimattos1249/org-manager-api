@@ -6,12 +6,13 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OrgManager.Application.Dtos;
+using OrgManager.Application.Interfaces;
 using OrgManager.Domain.Identity;
 using OrgManager.Repository.Interfaces;
 
 namespace OrgManager.Application
 {
-    public class AccountService
+    public class AccountService : IAccountService
     {
          private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
