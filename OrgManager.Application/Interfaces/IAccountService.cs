@@ -10,6 +10,7 @@ namespace OrgManager.Application.Interfaces
     public interface IAccountService
     {
         Task<bool> UserExists(string userName);
+        Task<UserUpdateDto> UserExistsInOrganization(int id, int organizationId);
         Task<UserUpdateDto> GetUserByUserNameAsync(string userName);
         Task<SignInResult> CheckUserPasswordAsync(UserUpdateDto userUpdateDto, string Password);
         Task<UserUpdateDto> CreatAccountAsync(UserDto userDto);

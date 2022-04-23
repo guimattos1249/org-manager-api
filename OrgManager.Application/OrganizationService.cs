@@ -52,7 +52,7 @@ namespace OrgManager.Application
             {
                 Organization organization = await _organizationRepository.GetOrganizationByIdAsync(model.Id);
                 if (organization == null) return null;
-                _organizationRepository.Update<Organization>(organization);
+                _organizationRepository.Update<Organization>(_mapper.Map<Organization>(model));
                 if(await _organizationRepository.SaveChangesAsync())
                 {
                     Organization organizationReturn = await _organizationRepository.GetOrganizationByIdAsync(organization.Id);

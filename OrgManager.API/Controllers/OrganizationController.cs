@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrgManager.Application.Dtos;
 using OrgManager.Application.Interfaces;
+using src.OrgManager.API.Extensions;
 
 namespace OrgManager.API.Controllers
 {
@@ -25,12 +26,13 @@ namespace OrgManager.API.Controllers
             _accountService = accountService;
         }
 
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try
             {
+                if(await _accountService.UserExistsInOrganization(User.GetUserId(), id) == null) 
+                    return this.StatusCode(StatusCodes.Status400BadRequest, $"Usuário não existe na Organização.");
                 var organization = await _organizationService.GetOrganizationByIdAsync(id);
                 if(organization == null) return NoContent();
 
@@ -63,6 +65,13 @@ namespace OrgManager.API.Controllers
         {
             try
             {
+                UserUpdateDto user = await _accountService.UserExistsInOrganization(User.GetUserId(), model.Id);
+                if( user == null ) 
+                    return Unauthorized("Usuário não existe na Organização.");
+                
+                if( user.Function != "Leader" || user.Function != "Owner" )
+                    return Unauthorized("Usuário não tem permissão para alterar a Organização");
+
                 var organization = await _organizationService.UpdateOrganization(model);
                 if(organization == null) return NoContent();
 
@@ -79,8 +88,15 @@ namespace OrgManager.API.Controllers
         {
             try
             {
+                UserUpdateDto user = await _accountService.UserExistsInOrganization(User.GetUserId(), id);
+                if( user == null ) 
+                    return Unauthorized("Usuário não existe na Organização.");
+                
+                if( user.Function != "Owner" )
+                    return Unauthorized("Usuário não tem permissão para excluir a Organização");
+
                 if(await _organizationService.DeleteOrganization(id)) 
-                    return Ok(new { message = "Deletado"}) ;
+                    return Ok(new { message = "Deletado "}) ;
                 else
                 {
                     throw new Exception("Ocorreu um problema não específico ao tentar deletar o Evento");

@@ -106,9 +106,9 @@ namespace OrgManager.Application
 
                 if(await _userRepository.SaveChangesAsync())
                 {
-                    var userRetorno = await _userRepository.GetUserByUserNameAsync(user.UserName);
+                    var userReturn = await _userRepository.GetUserByUserNameAsync(user.UserName);
 
-                    return _mapper.Map<UserUpdateDto>(userRetorno);
+                    return _mapper.Map<UserUpdateDto>(userReturn);
                 }
 
                 return null;
@@ -126,6 +126,20 @@ namespace OrgManager.Application
             {
                 return await _userManager.Users
                                             .AnyAsync(user => user.UserName == userName.ToLower());
+            }
+            catch (System.Exception ex)
+            {
+                
+                throw new Exception($"Erro ao verificar se o usuário existe. Erro: {ex.Message}");
+            }
+        }
+
+        public async Task<UserUpdateDto> UserExistsInOrganization(int id, int organizationId)
+        {
+            try
+            {
+                var userReturn = await _userRepository.GetUserByIdInOrganizationAsync(id, organizationId);
+                return _mapper.Map<UserUpdateDto>(userReturn);
             }
             catch (System.Exception ex)
             {

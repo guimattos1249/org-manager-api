@@ -9,7 +9,8 @@ namespace OrgManager.Repository.Interfaces
     public interface IUserRepository : IGeneralRepository
     {
         Task<IEnumerable<User>> GetUsersAsync();
-        Task<User> GetUserByIdAsync(int Id);
+        Task<User> GetUserByIdAsync(int id);
+        Task<User> GetUserByIdInOrganizationAsync(int id, int organizationId);
         Task<User> GetUserByUserNameAsync(string userName);
     }
 }

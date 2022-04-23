@@ -23,6 +23,11 @@ namespace OrgManager.Repository
             return await _context.Users.ToListAsync();
         }
 
+        public async Task<User> GetUserByIdInOrganizationAsync(int id, int organizationId)
+        {
+            return await _context.Users.AsNoTracking().Where(u => u.Id == id && u.OrganizationId == organizationId).FirstOrDefaultAsync();
+        }
+
         public async Task<User> GetUserByIdAsync(int Id)
         {
             return await _context.Users.FindAsync(Id);
