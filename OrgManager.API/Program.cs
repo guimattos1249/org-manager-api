@@ -11,6 +11,8 @@ using OrgManager.Domain.Identity;
 using OrgManager.Repository;
 using OrgManager.Repository.Contexts;
 using OrgManager.Repository.Interfaces;
+using src.OrgManager.Application;
+using src.OrgManager.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,11 +64,13 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IPhoneService, PhoneService>();
 
 builder.Services.AddScoped<IGeneralRepository, GeneralRepository>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+builder.Services.AddScoped<IPhoneRepository, PhoneRepository>();
 
 builder.Services.AddCors();
 

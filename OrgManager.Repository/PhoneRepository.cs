@@ -18,25 +18,20 @@ namespace OrgManager.Repository
             _context = context;
         }
 
-        public async Task<Phone> GetPhoneUserByIdsAsync(int userId, int id)
+        public async Task<Phone> GetPhoneByIdAsync(int userId, int organizationId, int phoneId)
         {
             IQueryable<Phone> query = _context.Phones;
 
-            query = query.AsNoTracking()
-                         .Where(ph => ph.UserId == userId &&
-                                      ph.Id == id);
-
-
-            return await query.FirstOrDefaultAsync();
-        }
-
-        public async Task<Phone> GetPhoneOrganizationByIdsAsync(int organizationId, int id)
-        {
-            IQueryable<Phone> query = _context.Phones;
-
-            query = query.AsNoTracking()
-                         .Where(ph => ph.OrganizationId == organizationId &&
-                                      ph.Id == id);
+            if(userId != 0)
+            {
+                query = query.AsNoTracking()
+                            .Where(ph => ph.UserId == userId &&
+                                        ph.Id == phoneId);
+            }
+            else
+                query = query.AsNoTracking()
+                            .Where(ph => ph.OrganizationId == organizationId &&
+                                        ph.Id == phoneId);
 
 
             return await query.FirstOrDefaultAsync();

@@ -49,7 +49,7 @@ namespace OrgManager.API.Controllers
         {
             try
             {
-                var organization = await _organizationService.AddOrganizations(model);
+                var organization = await _organizationService.AddOrganization(model);
                 if(organization == null) return NoContent();
 
                 return Ok(organization);

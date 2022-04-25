@@ -25,7 +25,7 @@ namespace OrgManager.Application
             _mapper = mapper;
         }
 
-        public async Task<OrganizationDto> AddOrganizations(OrganizationDto model)
+        public async Task<OrganizationDto> AddOrganization(OrganizationDto model)
         {
             try
             {

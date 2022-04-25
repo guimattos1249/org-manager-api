@@ -9,7 +9,7 @@ namespace OrgManager.Application.Interfaces
 {
     public interface IOrganizationService
     {
-        Task<OrganizationDto> AddOrganizations(OrganizationDto model);
+        Task<OrganizationDto> AddOrganization(OrganizationDto model);
         Task<OrganizationDto> UpdateOrganization(OrganizationDto model);
         Task<bool> DeleteOrganization(int organizationId);
 
