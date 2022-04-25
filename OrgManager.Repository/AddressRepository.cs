@@ -22,59 +22,35 @@ namespace OrgManager.Repository
         {
             IQueryable<Address> query = _context.Addresses;
 
-            query = query.AsNoTracking()
-                         .Where(ad => ad.OrganizationId == organizationId &&
-                                      ad.Id == addressId);
-
             if(userId != 0)
-                query = query.Where(ad => ad.UserId == userId);
+            {
+                query = query.AsNoTracking()
+                            .Where(ph => ph.UserId == userId &&
+                                        ph.Id == addressId);
+            }
+            else
+                query = query.AsNoTracking()
+                            .Where(ph => ph.OrganizationId == organizationId &&
+                                        ph.Id == addressId);
 
 
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Address[]> GetAllByAddressesIdsAsync(int organizationId, int addressId, int userId = 0)
+        public async Task<Address[]> GetAllByAddressesIdAsync(int userId, int organizationId)
         {
             IQueryable<Address> query = _context.Addresses;
-
-            query = query.AsNoTracking()
-                         .Where(ad => ad.OrganizationId == organizationId);
 
             if(userId != 0)
-                query = query.Where(ad => ad.UserId == userId);
-
-            return await query.ToArrayAsync();
-        }
-
-        public async Task<Address> GetAddressOrganizationByIdsAsync(int organizationId, int id)
-        {
-            IQueryable<Address> query = _context.Addresses;
-
-            query = query.AsNoTracking()
-                         .Where(ad => ad.OrganizationId == organizationId &&
-                                      ad.Id == id);
-
-
-            return await query.FirstOrDefaultAsync();
-        }
-
-        public async Task<Address[]> GetAllByUserIdsAsync(int userId)
-        {
-            IQueryable<Address> query = _context.Addresses;
-
-            query = query.AsNoTracking()
-                         .Where(ad => ad.UserId == userId);
-
-
-            return await query.ToArrayAsync();
-        }
-
-        public async Task<Address[]> GetAllByOrganizationIdsAsync(int organizationId)
-        {
-            IQueryable<Address> query = _context.Addresses;
-
-            query = query.AsNoTracking()
-                         .Where(ad => ad.OrganizationId == organizationId);
+            {
+                query = query.AsNoTracking()
+                            .Where(ph => ph.UserId == userId);
+            }
+            else
+            {
+                query = query.AsNoTracking()
+                            .Where(ph => ph.OrganizationId == organizationId);
+            }
 
 
             return await query.ToArrayAsync();
