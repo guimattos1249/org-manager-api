@@ -37,23 +37,20 @@ namespace OrgManager.Repository
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Phone[]> GetAllByUserIdsAsync(int userId)
+        public async Task<Phone[]> GetAllPhonesByIdAsync(int userId, int organizationId)
         {
             IQueryable<Phone> query = _context.Phones;
 
-            query = query.AsNoTracking()
-                         .Where(ph => ph.UserId == userId);
-
-
-            return await query.ToArrayAsync();
-        }
-
-        public async Task<Phone[]> GetAllByOrganizationIdsAsync(int organizationId)
-        {
-            IQueryable<Phone> query = _context.Phones;
-
-            query = query.AsNoTracking()
-                         .Where(ph => ph.OrganizationId == organizationId);
+            if(userId != 0)
+            {
+                query = query.AsNoTracking()
+                            .Where(ph => ph.UserId == userId);
+            }
+            else
+            {
+                query = query.AsNoTracking()
+                            .Where(ph => ph.OrganizationId == organizationId);
+            }
 
 
             return await query.ToArrayAsync();

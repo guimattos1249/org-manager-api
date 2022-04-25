@@ -91,9 +91,7 @@ namespace OrgManager.Application
                 var organization = await _organizationRepository.GetOrganizationByIdAsync(organizationId);
                 if (organization == null) return null;
 
-                var resultado = _mapper.Map<OrganizationDto>(organization);
-
-                return resultado;
+                return _mapper.Map<OrganizationDto>(organization);;
             }
             catch (Exception ex)
             {

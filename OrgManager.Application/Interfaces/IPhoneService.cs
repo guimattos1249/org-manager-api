@@ -13,5 +13,6 @@ namespace src.OrgManager.Application.Interfaces
         Task<bool> DeletePhone(int userId, int organizationId, int phoneId);
 
         Task<PhoneDto> GetPhoneByIdAsync(int userId, int organizationId, int phoneId);
+        Task<PhoneDto[]> GetAllPhonesByIdAsync(int userId, int organizationId);
     }
 }

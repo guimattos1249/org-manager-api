@@ -49,9 +49,28 @@ namespace src.OrgManager.Application
             }
         }
 
-        public Task<PhoneDto> UpdatePhone(int userId, int organizationId, PhoneDto model)
+        public async Task<PhoneDto> UpdatePhone(int userId, int organizationId, PhoneDto model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Phone phoneToUpdate = await _phoneRepository.GetPhoneByIdAsync(userId, organizationId, model.Id);
+                if(phoneToUpdate == null) return null;
+                if(organizationId != 0) model.OrganizationId = organizationId;
+                if(userId != 0) model.UserId = userId;
+                _phoneRepository.Update<Phone>(_mapper.Map<Phone>(model));
+                if(await _phoneRepository.SaveChangesAsync())
+                {
+                    Phone phoneReturn = await _phoneRepository.GetPhoneByIdAsync(userId, organizationId, model.Id);
+
+                    return _mapper.Map<PhoneDto>(phoneReturn);
+                }
+                return null;
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
         }
 
         public async Task<bool> DeletePhone(int userId, int organizationId, int phoneId)
@@ -69,9 +88,34 @@ namespace src.OrgManager.Application
             }
         }
 
-        public Task<PhoneDto> GetPhoneByIdAsync(int userId, int organizationId, int phoneId)
+        public async Task<PhoneDto> GetPhoneByIdAsync(int userId, int organizationId, int phoneId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Phone phone = await _phoneRepository.GetPhoneByIdAsync(userId, organizationId, phoneId);
+                if(phone == null) return null;
+
+                return _mapper.Map<PhoneDto>(phone);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<PhoneDto[]> GetAllPhonesByIdAsync(int userId, int organizationId)
+        {
+            try
+            {
+                Phone[] phones = await _phoneRepository.GetAllPhonesByIdAsync(userId, organizationId);
+                if(phones == null) return null;
+
+                return _mapper.Map<PhoneDto[]>(phones);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
