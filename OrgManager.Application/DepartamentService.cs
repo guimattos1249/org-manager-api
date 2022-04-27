@@ -111,6 +111,32 @@ namespace src.OrgManager.Application
             }
         }
 
+        public async Task<UserDepartamentDto> UpdateUserDepartament(int userId, int organizationId, UserDepartamentDto model)
+        {
+            try
+            {
+                UserDepartament userDepartament = await _userDepartamentRepository.GetUserDepartamentByIdsAsync(userId, model.DepartamentId, organizationId);
+                model.UserId = userId;
+                if(userDepartament == null) return null;
+                if(userDepartament.Function == Function.Leader || userDepartament.Function == Function.Owner)
+                {
+                    _userDepartamentRepository.Update<UserDepartament>(_mapper.Map<UserDepartament>(model));
+                    if(await _userDepartamentRepository.SaveChangesAsync())
+                    {
+                        UserDepartament userDepartamentReturn = await _userDepartamentRepository.GetUserDepartamentByIdsAsync(userId, model.DepartamentId, organizationId); 
+
+                        return _mapper.Map<UserDepartamentDto>(userDepartamentReturn);
+                    }
+                }
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<bool> DeleteDepartament(int organizationId, int departamentId)
         {
              try

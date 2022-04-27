@@ -81,6 +81,24 @@ namespace OrgManager.API.Controllers
             }
         }
 
+        [HttpPut("UserDepartament/{organizationId}")]
+        public async Task<IActionResult> PutUserDepartament(UserDepartamentDto model, int organizationId)
+        {
+            try
+            {
+                if(await _accountService.UserExistsInOrganization(User.GetUserId(), organizationId) == null)
+                    return this.StatusCode(StatusCodes.Status400BadRequest, $"Usuário não existe na Organização.");
+                UserDepartamentDto userDepartament = await _departamentService.UpdateUserDepartament(User.GetUserId(), organizationId, model);
+                if(userDepartament == null) return NoContent();
+
+                return Ok(userDepartament);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar Alterar Departamento. Erro: {ex.Message}");
+            }
+        }
+
         [HttpDelete("{organizationId}/{departamentId}")]
         public async Task<IActionResult> Delete(int organizationId, int departamentId )
         {

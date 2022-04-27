@@ -12,6 +12,7 @@ namespace OrgManager.Application.Interfaces
         Task<DepartamentDto> AddDepartament(int userId, DepartamentDto model);
         Task<bool> AddUserDepartament(int userId, int departamentId, UserDepartamentDto model);
         Task<DepartamentDto> UpdateDepartament(int userId, int organizationId, DepartamentDto model);
+        Task<UserDepartamentDto> UpdateUserDepartament(int userId, int organizationId, UserDepartamentDto model);
         Task<bool> DeleteDepartament(int organizationId, int departamentId);
         Task<bool> DeleteUserDepartament(int organizationId, int departamentId);
 
