@@ -115,15 +115,16 @@ namespace src.OrgManager.Application
         {
             try
             {
-                UserDepartament userDepartament = await _userDepartamentRepository.GetUserDepartamentByIdsAsync(userId, model.DepartamentId, organizationId);
-                model.UserId = userId;
-                if(userDepartament == null) return null;
-                if(userDepartament.Function == Function.Leader || userDepartament.Function == Function.Owner)
+                UserDepartament userHasPermisson = await _userDepartamentRepository.GetUserDepartamentByIdsAsync(userId, model.DepartamentId, organizationId);
+                if(userHasPermisson == null) return null;
+                if(userHasPermisson.Function == Function.Leader || userHasPermisson.Function == Function.Owner)
                 {
+                    UserDepartament userDepartament = await _userDepartamentRepository.GetUserDepartamentByIdsAsync(model.UserId, model.DepartamentId, organizationId);
+                    if(userDepartament == null) return null;
                     _userDepartamentRepository.Update<UserDepartament>(_mapper.Map<UserDepartament>(model));
                     if(await _userDepartamentRepository.SaveChangesAsync())
                     {
-                        UserDepartament userDepartamentReturn = await _userDepartamentRepository.GetUserDepartamentByIdsAsync(userId, model.DepartamentId, organizationId); 
+                        UserDepartament userDepartamentReturn = await _userDepartamentRepository.GetUserDepartamentByIdsAsync(model.UserId, model.DepartamentId, organizationId); 
 
                         return _mapper.Map<UserDepartamentDto>(userDepartamentReturn);
                     }
