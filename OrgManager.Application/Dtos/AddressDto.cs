@@ -14,6 +14,12 @@ namespace OrgManager.Application.Dtos
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public string? Distric { get; set; }
+        
+        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+        public string? City { get; set; }
+        
+        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+        public string? State { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public string? CEP { get; set; }

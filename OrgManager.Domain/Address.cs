@@ -8,6 +8,8 @@ namespace OrgManager.Domain
         public string? Street { get; set; }
         public int Number { get; set; }
         public string? Distric { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
         public string? CEP { get; set; }
         public int? OrganizationId { get; set; }
         public Organization? Organization { get; set; }
