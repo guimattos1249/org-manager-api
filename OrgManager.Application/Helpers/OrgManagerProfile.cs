@@ -16,6 +16,7 @@ namespace OrgManager.Application.Helpers
             CreateMap<Organization, OrganizationDto>().ReverseMap();
             CreateMap<OrganizationDto, Organization>().ReverseMap();
             CreateMap<Departament, DepartamentDto>().ReverseMap();
+            CreateMap<UserDepartament, UserDepartamentDto>().ReverseMap();
             CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<Phone, PhoneDto>().ReverseMap();
             

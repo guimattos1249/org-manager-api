@@ -65,12 +65,17 @@ builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IPhoneService, PhoneService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IDepartamentService, DepartamentService>();
 
 builder.Services.AddScoped<IGeneralRepository, GeneralRepository>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddScoped<IPhoneRepository, PhoneRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IDepartamentRepository, DepartamentRepository>();
+builder.Services.AddScoped<IUserDepartamentRepository, UserDepartamentRepository>();
 
 builder.Services.AddCors();
 

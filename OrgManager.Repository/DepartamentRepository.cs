@@ -20,65 +20,58 @@ namespace OrgManager.Repository
             _context = context;
         }
 
-        public async Task<Departament> GetDepartamentByIdsAsync(int organizationId, int departamentId)
-        {
-            IQueryable<Departament> query = _context.Departaments;
-
-            query = query.AsNoTracking()
-                         .Where(dp => dp.OrganizationId == organizationId &&
-                                      dp.Id == departamentId);
-                                      
-            return await query.FirstOrDefaultAsync();
-        }
-
-        public async Task<PageList<Departament>> GetAllByDepartamentesIdsAsync(PageParams pageParams, int organizationId, int departamentId)
-        {
-            IQueryable<Departament> query = _context.Departaments;
-
-            query = query.AsNoTracking()
-                         .Where(o => o.Name.ToLower().Contains(pageParams.Term.ToLower()))
-                         .OrderBy(o => o.Id);
-
-            return await PageList<Departament>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
-        }
-
-        public async Task<Departament> GetAllUsersInDepartamentByIdsAsync(int departamentId)
+        public async Task<Departament> GetDepartamentByIdAsync(int departamentId, int organizationId)
         {
             IQueryable<Departament> query = _context.Departaments.
-                    Include(d => d.UserDepartament).
-                    ThenInclude(ud => ud.User);
-
-
-            query = query.AsNoTracking()
-                         .Where(dp => dp.Id == departamentId);
-
+                AsNoTracking().
+                Where(d => 
+                        d.Id == departamentId && 
+                        d.OrganizationId == organizationId);
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<User> GetAllDepartamentsInUserByIdsAsync(int userId)
+        public async Task<Departament> GetAllUsersInDepartamentAsync(int departamentId, int organizationId)
+        {
+            IQueryable<Departament> query = _context.Departaments.
+                Include(d => d.UserDepartament).
+                ThenInclude(ud => ud.User);
+
+            query = query.AsNoTracking().
+                            Where(d => 
+                        d.Id == departamentId && 
+                        d.OrganizationId == organizationId);
+                        
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<User> GetAllDepartamentsInUserAsync(int userId)
         {
             IQueryable<User> query = _context.Users.
-                    Include(u => u.UserDepartament).
-                    ThenInclude(ud => ud.Departament);
+                Include(u => u.UserDepartament)
+                .ThenInclude(ud => ud.Departament);
 
-
-            query = query.AsNoTracking()
-                         .Where(dp => dp.Id == userId);
+            query = query.AsNoTracking().
+                            Where(u => u.Id == userId);
 
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<UserDepartament> GetUserDepartamentByIdsAsync(int departamentId, int userId)
+        public async Task<Departament[]> GetAllDepartamentsInOrganizationAsync(int organizationId)
         {
-            IQueryable<UserDepartament> query = _context.UserDepartaments.
-                    Include(ud => ud.User).
-                    Include(ud => ud.Departament);
+            IQueryable<Departament> query = _context.Departaments.
+                AsNoTracking().
+                Where(d => d.OrganizationId == organizationId);
+            return await query.ToArrayAsync();
+        }
 
-            query = query.AsNoTracking()
-                         .Where(ud => ud.DepartamentId == departamentId && 
-                                ud.UserId == userId);
-
-            return await query.FirstOrDefaultAsync();
+        public async Task<Departament[]> GetAllDepartamentsWithAllUsersInOrganizationAsync(int organizationId)
+        {
+            IQueryable<Departament> query = _context.Departaments.
+                Include(d => d.UserDepartament).
+                ThenInclude(ud => ud.User).
+                AsNoTracking().
+                Where(d => d.OrganizationId == organizationId);
+            return await query.ToArrayAsync();
         }
     }
 }

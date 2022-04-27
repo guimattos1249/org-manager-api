@@ -24,6 +24,6 @@ namespace OrgManager.Application.Dtos
         public string? Token { get; set; }
         public IEnumerable<AddressDto>? Addresses { get; set; }
         public IEnumerable<PhoneDto>? Phones { get; set; }
-        public IEnumerable<DepartamentDto>? Departaments { get; set; }
+        public IEnumerable<UserDepartamentDto>? UserDepartament { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace src.OrgManager.Application
                 _addressRepository.Add<Address>(address);
                 if(await _addressRepository.SaveChangesAsync())
                 {
-                    Address addressReturn = await _addressRepository.GetAddressByIdsAsync(userId, organizationId, address.Id);
+                    Address addressReturn = await _addressRepository.GetAddressByIdsAsync(organizationId, address.Id, userId);
                     return _mapper.Map<AddressDto>(addressReturn);
                 }
                 return null;
@@ -53,14 +53,14 @@ namespace src.OrgManager.Application
         {
             try
             {
-                Address addressToUpdate = await _addressRepository.GetAddressByIdsAsync(userId, organizationId, model.Id);
-                if(addressToUpdate == null) return null;
+                Address address = await _addressRepository.GetAddressByIdsAsync(organizationId, model.Id, userId);
+                if(address == null) return null;
                 if(organizationId != 0) model.OrganizationId = organizationId;
                 if(userId != 0) model.UserId = userId;
                 _addressRepository.Update<Address>(_mapper.Map<Address>(model));
                 if(await _addressRepository.SaveChangesAsync())
                 {
-                    Address addressReturn = await _addressRepository.GetAddressByIdsAsync(userId, organizationId, model.Id);
+                    Address addressReturn = await _addressRepository.GetAddressByIdsAsync(organizationId, address.Id, userId);
 
                     return _mapper.Map<AddressDto>(addressReturn);
                 }
@@ -72,11 +72,11 @@ namespace src.OrgManager.Application
             }
         }
 
-        public async Task<bool> DeleteAddress(int userId, int organizationId, int AddressId)
+        public async Task<bool> DeleteAddress(int userId, int organizationId, int addressId)
         {
             try
             {            
-                Address addressToDelete = await _addressRepository.GetAddressByIdsAsync(userId, organizationId, AddressId);
+                Address addressToDelete = await _addressRepository.GetAddressByIdsAsync(organizationId, addressId, userId);
                 if(addressToDelete == null) return false;
                 _addressRepository.Delete<Address>(addressToDelete);
                 return await _addressRepository.SaveChangesAsync();
@@ -91,7 +91,7 @@ namespace src.OrgManager.Application
         {
             try
             {
-                Address Address = await _addressRepository.GetAddressByIdsAsync(userId, organizationId, addressId);
+                Address Address = await _addressRepository.GetAddressByIdsAsync(organizationId, addressId, userId);
                 if(Address == null) return null;
 
                 return _mapper.Map<AddressDto>(Address);

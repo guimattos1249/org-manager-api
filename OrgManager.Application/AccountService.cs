@@ -85,6 +85,24 @@ namespace OrgManager.Application
             }
         }
 
+        public async Task<UserUpdateDto> GetUserByIdAsync(int id)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserByIdAsync(id);
+                if(user == null) return null;
+
+                var userUpdateDto = _mapper.Map<UserUpdateDto>(user);
+                return userUpdateDto;
+
+            }
+            catch (System.Exception ex)
+            {
+                
+                throw new Exception($"Erro ao tentar buscar usuário por username. Erro: {ex.Message}");
+            }
+        }
+
         public async Task<UserUpdateDto> UpdateAccount(UserUpdateDto userUpdateDto)
         {
             try

@@ -12,6 +12,7 @@ namespace OrgManager.Application.Interfaces
         Task<bool> UserExists(string userName);
         Task<UserUpdateDto> UserExistsInOrganization(int id, int organizationId);
         Task<UserUpdateDto> GetUserByUserNameAsync(string userName);
+        Task<UserUpdateDto> GetUserByIdAsync(int id);
         Task<SignInResult> CheckUserPasswordAsync(UserUpdateDto userUpdateDto, string Password);
         Task<UserUpdateDto> CreatAccountAsync(UserDto userDto);
         Task<UserUpdateDto> UpdateAccount(UserUpdateDto userUpdateDto);

@@ -6,10 +6,10 @@ namespace OrgManager.Repository.Interfaces
 {
     public interface IDepartamentRepository : IGeneralRepository
     {
-        Task<Departament> GetDepartamentByIdsAsync(int organizationId, int departamentId);
-        Task<PageList<Departament>> GetAllByDepartamentesIdsAsync(PageParams pageParams, int organizationId, int departamentId);
-        Task<Departament> GetAllUsersInDepartamentByIdsAsync(int departamentId);
-        Task<User> GetAllDepartamentsInUserByIdsAsync(int userId);
-        Task<UserDepartament> GetUserDepartamentByIdsAsync(int departamentId, int userId);
+        Task<Departament> GetDepartamentByIdAsync(int departamentId, int organizationId);
+        Task<Departament> GetAllUsersInDepartamentAsync(int departamentId, int organizationId);
+        Task<User> GetAllDepartamentsInUserAsync(int userId);
+        Task<Departament[]> GetAllDepartamentsInOrganizationAsync(int organizationId);
+        Task<Departament[]> GetAllDepartamentsWithAllUsersInOrganizationAsync(int organizationId);
     }
 }

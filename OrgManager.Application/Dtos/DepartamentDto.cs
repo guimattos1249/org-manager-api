@@ -7,6 +7,6 @@ namespace OrgManager.Application.Dtos
         public string? ImageUrl { get; set; }
         public int OrganizationId { get; set; }
         public OrganizationDto? Organization { get; set; }
-        public IEnumerable<UserDto>? UserDepartament { get; set; }
+        public IEnumerable<UserDepartamentDto>? UserDepartament { get; set; }
     }
 }
